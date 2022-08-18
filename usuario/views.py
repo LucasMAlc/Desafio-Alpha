@@ -5,7 +5,7 @@ def cadastro(request):
     return HttpResponse('Página de cadastro')
 
 def login(request):
-    return HttpResponse('Página de login')
+    return render(request, 'login/login.html')
 
 def home(request):
     return HttpResponse('hello world')
