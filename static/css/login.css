@@ -25,10 +25,6 @@
   font-size: 14px;
 }
 
-.form input[type=number]{
-  background: #f5d38fa1;
-  width: 50%;
-}
 .form button {
   font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
   text-transform: uppercase;

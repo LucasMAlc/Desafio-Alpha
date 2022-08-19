@@ -1,0 +1,24 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title> Login </title>
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link href="{% static 'css/login.css' %}" rel="stylesheet">
+    </head>
+    <body>
+        <div class="cadastro-page">
+            <div class="form">
+              <form class="cadastro-form">
+                <input type="text" placeholder="nome"/>
+                <input type="email" placeholder="email"/>
+                <input type="password" placeholder="senha"/>
+                <input type="number" placeholder="idade"/>
+                <button>Cadastrar</button>
+                <p class="message">Já tem uma conta? <a href="">Faça login</a></p>
+              </form>
+            </div>
+          </div>
+    </body>
+</html>
