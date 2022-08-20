@@ -1,5 +1,4 @@
 from django.shortcuts import render
-from django.http import HttpResponse
 
 def cadastro(request):
     return render(request, 'cadastro.html')
@@ -7,5 +6,3 @@ def cadastro(request):
 def login(request):
     return render(request, 'login.html')
 
-def home(request):
-    return HttpResponse('hello world')
