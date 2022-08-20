@@ -2,10 +2,10 @@
 {% load static %}
 
     {% block 'head' %}
-        <link href="{% static 'css/login.css' %}" rel="stylesheet">
+        <link href="{% static 'css/cadastro.css' %}" rel="stylesheet">
     {% endblock 'head' %}
 
-    {% block 'titulo' %} Cadastre-se {% endblock %} Cadastre-se 
+    {% block 'titulo' %} Cadastre-se | Alpha {% endblock %}
 
     {% block 'conteudo' %}
         <br>
@@ -15,22 +15,22 @@
             </div>
         {% endif %}
         {% if status == '1' %}
-            <div class="alert alert-warning" role="alert">
+            <div class="alert alert-danger" role="alert">
                 Nome e email não podem estar vazios.
             </div>
         {% endif %}
         {% if status == '2' %}
-            <div class="alert alert-warning" role="alert">
+            <div class="alert alert-danger" role="alert">
                 Sua senha deve possuir pelo menos 6 caracteres.
             </div>
         {% endif %}
         {% if status == '3' %}
-            <div class="alert alert-warning" role="alert">
+            <div class="alert alert-danger" role="alert">
                 Usuário já existe no sistema.
             </div>
         {% endif %}
         {% if status == '4' %}
-            <div class="alert alert-warning" role="alert">
+            <div class="alert alert-danger" role="alert">
                 Erro interno do sistema.
             </div>
         {% endif %}

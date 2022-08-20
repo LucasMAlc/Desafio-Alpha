@@ -9,7 +9,8 @@ def cadastro(request):
     return render(request, 'cadastro.html', {'status': status})
 
 def login(request):
-    return render(request, 'login.html')
+    status = request.GET.get('status')
+    return render(request, 'login.html', {'status': status})
 
 def valida_cadastro(request):
     nome = request.POST.get('nome')
@@ -36,3 +37,23 @@ def valida_cadastro(request):
         return redirect('cadastro/?status=0')
     except:
         return redirect('cadastro/?status=4')
+
+def valida_login(request):
+    email = request.POST.get('email')
+    senha = request.POST.get('senha')
+    
+    senha = sha256(senha.encode()).hexdigest()
+
+    usuario = Usuarios.objects.filter(email = email).filter(senha = senha)
+
+    if len(usuario) == 0:
+        return redirect('login/?status=1')
+    elif len(usuario) > 0:
+        request.session['usuario'] = usuario[0].id
+        return redirect(f"/home/?id_usuario={request.session['usuario']}")
+
+    return HttpResponse(f'{email} {senha}')
+
+def sair(request):
+    request.session.flush()
+    return redirect('/usuario/login/')

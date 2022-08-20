@@ -1,22 +1,40 @@
+{% extends 'base.html' %}
 {% load static %}
-<!DOCTYPE html>
-<html>
-    <head>
-        <meta charset="utf-8">
-        <title> Login </title>
-        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    {% block 'head' %}
         <link href="{% static 'css/login.css' %}" rel="stylesheet">
-    </head>
-    <body>
-      <div class="login-page">
-        <div class = "form">
-          <form class="login-form">
-            <input type="text" placeholder="email"/>
-            <input type="password" placeholder="senha"/>
-            <button>Login</button>
-            <p class="message">Não é cadastrado?<a href=""> Crie uma conta.</a></p>
-          </form>
+    {% endblock 'head' %}
+
+    {% block 'titulo' %} Login | Alpha  {% endblock %}
+
+    {% block 'conteudo' %}
+        <br>
+
+        {% if status == '1' %}
+            <div class="alert alert-danger" role="alert">
+                Email ou senha inválidos.
+            </div>
+        {% endif %}
+
+        {% if status == '2' %}
+            <div class="alert alert-danger" role="alert">
+                Faça login antes de acessar o sistema.
+            </div>
+        {% endif %}
+
+        <div class="login-page">
+          <div class = "form">
+            <form class="login-form" method="POST" action={% url 'valida_login' %}> {% csrf_token %}
+
+              <input name="email" type="text" placeholder="email"/>
+              <input name="senha" type="password" placeholder="senha"/>
+
+              <input type="submit" value="Login"/>
+
+              <p class="message">Não é cadastrado?<a href="{% url 'cadastro' %}"> Crie uma conta.</a></p>
+
+            </form>
+          </div>
         </div>
-      </div>
-    </body>
-</html>
+
+    {% endblock  %}
