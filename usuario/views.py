@@ -5,7 +5,8 @@ from .models import Usuarios
 from hashlib import sha256
 
 def cadastro(request):
-    return render(request, 'cadastro.html')
+    status = request.GET.get('status') 
+    return render(request, 'cadastro.html', {'status': status})
 
 def login(request):
     return render(request, 'login.html')

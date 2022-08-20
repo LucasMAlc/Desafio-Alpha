@@ -9,6 +9,31 @@
 
     {% block 'conteudo' %}
         <br>
+        {% if status == '0' %}
+            <div class="alert alert-success" role="alert">
+                Cadastro realizado com sucesso!
+            </div>
+        {% endif %}
+        {% if status == '1' %}
+            <div class="alert alert-warning" role="alert">
+                Nome e email não podem estar vazios.
+            </div>
+        {% endif %}
+        {% if status == '2' %}
+            <div class="alert alert-warning" role="alert">
+                Sua senha deve possuir pelo menos 6 caracteres.
+            </div>
+        {% endif %}
+        {% if status == '3' %}
+            <div class="alert alert-warning" role="alert">
+                Usuário já existe no sistema.
+            </div>
+        {% endif %}
+        {% if status == '4' %}
+            <div class="alert alert-warning" role="alert">
+                Erro interno do sistema.
+            </div>
+        {% endif %}
         <div class="cadastro-page">
             <div class="form">
               <form class="cadastro-form" method="POST" action= {% url 'valida_cadastro' %}>{% csrf_token %}
@@ -20,7 +45,7 @@
 
                 <input type="submit" value="Cadastrar"/>
 
-                <p class="message">Já tem uma conta? <a href="">Faça login</a></p>
+                <p class="message">Já tem uma conta? <a href="{% url 'login' %}">Faça login</a></p>
 
               </form>
             </div>
