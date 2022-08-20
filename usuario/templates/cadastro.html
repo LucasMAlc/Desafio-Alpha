@@ -11,13 +11,13 @@
         <br>
         <div class="cadastro-page">
             <div class="form">
-              <form class="cadastro-form" method = "POST">{% csrf_token %}
+              <form class="cadastro-form" method="POST" action= {% url 'valida_cadastro' %}>{% csrf_token %}
 
                 <input name="nome" type="text" placeholder="nome"/>
                 <input name="email" type="email" placeholder="email"/>
                 <input name="senha" type="password" placeholder="senha"/>
                 <input name="idade" type="number" placeholder="idade"/>
-                
+
                 <input type="submit" value="Cadastrar"/>
 
                 <p class="message">Já tem uma conta? <a href="">Faça login</a></p>
