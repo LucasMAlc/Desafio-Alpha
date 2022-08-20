@@ -4,6 +4,7 @@ from django.shortcuts import redirect
 from usuario.models import Usuarios
 from yahooquery import Ticker
 import yfinance as yf
+from .models import Ativos
 
 
 def home(request):
