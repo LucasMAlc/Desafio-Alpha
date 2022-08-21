@@ -5,19 +5,18 @@
         <link href="{% static 'css/user.css' %}" rel="stylesheet">
     {% endblock 'head' %}
 
-    {% block 'titulo' %} Sobre | Alpha {% endblock %}
+    {% block 'titulo' %} Minha Conta | Alpha {% endblock %}
 
     {% block 'conteudo' %}
+    
         <div class="user-page">
             <br>
             <div class="col-md">
                 <div class="card" style="width: 18rem;">
                     <div class="card-body">
-                        <h5 class="card-title">Informações: </h5>
-                        <p class="card-text">Nome: Lucas Moura Alcantara</p>
-                        <p class="card-text">Email: lucasmoura404@gmail.com</p>
-                        <p class="card-text">Idade: 22 anos</p>
-                        <a href="https://github.com/LucasMAlc" class="card-link">github.</a>
+                        <p class="card-text">Nome cadastrado: {{usuario.nome}}</p>
+                        <p class="card-text">Email cadastrado: {{usuario.email}}</p>
+                        <p class="card-text">Idade cadastrada: {{usuario.idade}}</p>
                     </div>
                 </div>
             </div>

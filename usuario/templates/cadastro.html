@@ -36,7 +36,7 @@
         {% endif %}
         <div class="cadastro-page">
             <div class="form">
-              <form class="cadastro-form" method="POST" action= {% url 'valida_cadastro' %}>{% csrf_token %}
+              <form class="cadastro-form" method="POST" action= {% url 'valida_cadastro' %}>{%csrf_token%}
 
                 <input name="nome" type="text" placeholder="nome"/>
                 <input name="email" type="email" placeholder="email"/>
@@ -49,5 +49,5 @@
 
               </form>
             </div>
-          </div>
+        </div>
     {% endblock  %}
