@@ -1,5 +1,5 @@
 .home-page {
-    width: 720px;
+    width: 60%;
     padding: 8% 0 0;
     margin: auto;
   }
@@ -8,9 +8,9 @@
     position: relative;
     z-index: 1;
     background: #464646;
-    max-width: 360px;
-    margin: 0 auto 45px;
-    padding: 15px;
+    max-width: 50%px;
+    margin: 0 auto 5%px;
+    padding: 2%px;
     text-align: left;
     box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2), 0 5px 5px 0 rgba(0, 0, 0, 0.24);
   }
@@ -20,14 +20,14 @@
     background: #d3d1d1;
     width: 100%;
     border: 0;
-    margin: 0 0 10px;
-    padding: 10px;
+    margin: 0 0 1%;
+    padding: 1%;
     box-sizing: border-box;
-    font-size: 12px;
+    font-size: 0.8em;
   }
 
   div .card a {
-    font-size: 10px;
+    font-size: 0.8em;
   }
 
   body {

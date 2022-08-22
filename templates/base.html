@@ -13,7 +13,7 @@
     <title>{% block 'titulo' %} {% endblock %}</title>
   </head>
   <body>
-    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
       <a class="navbar-brand" href="{% url 'home' %}"> Alpha </a>
       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
@@ -33,6 +33,7 @@
             <a class="nav-link" href="{% url 'sobre' %}"> Sobre </a>
           </li>
           {% if  usuario_logado %}
+            
             <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
               Novo ativo
             </button>
