@@ -1,7 +1,7 @@
 # Desafio Alpha
     Sistema em Python com Django do Desafio Alpha
 
-## Para testar
+# Para testar
 Como a consulta é feita pelo yahoo finance se utiliza o .SA
 exemplos:
         PETR4.SA
