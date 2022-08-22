@@ -1,0 +1,47 @@
+{% extends 'base.html' %}
+{% load static %}
+
+  {% block 'head' %}
+      <link href="{% static 'css/home.css' %}" rel="stylesheet">
+  {% endblock 'head' %}
+
+  {% block 'titulo' %} Info | Alpha {% endblock %}
+
+{% block 'conteudo' %}
+
+<div class="modal fade" id="exampleModal2" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel2" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+      <div class="modal-content">
+          <div class="modal-header">
+              <h5 class="modal-title" id="exampleModalLabel">Deseja mesmo excluir?</h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+              </button>
+          </div>
+          <div class="modal-body">
+              <a href="{% url 'excluir_ativo' id_ativo %}" class="btn btn-danger btn-sm">Excluir</a>
+          </div>
+      </div>
+  </div>    
+</div>
+
+<div class="home-page">
+  <br>
+  <div class="col-md">
+    <div class="card" style="width: 18rem;">
+      <div class="card-body">
+
+        <h5 class="card-title">{{ativo.sigla}}</h5>
+        <p class="card-text">Preço de compra: {{ativo.preco_compra}}</p>
+        <p class="card-text">Preço de venda: {{ativo.preco_venda}}</p>
+        <a1 class="card-text">Mais informações?</a1>
+        <a href="https://br.financas.yahoo.com/quote/{{ativo.sigla}}" class="card-link">Clique aqui.</a>
+        <button type="button" class="btn btn-danger btn-lg" data-toggle="modal" data-target="#exampleModal2">
+          Excluir
+        </button>
+        
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}

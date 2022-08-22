@@ -1,5 +1,3 @@
-from hmac import compare_digest
-from tracemalloc import start
 from django.http import HttpResponse
 from django.shortcuts import render, redirect
 from usuario.models import Usuarios
@@ -30,10 +28,8 @@ def home(request):
             elif(x['Close'].iloc[0] < ativo.preco_compra):
                 print('compra', ativo.sigla)
             else:
-                print('valor igual')
+                print('nenhuma operação recomendada')
                 
-
-
         return render(request, 'home.html', {'ativos': ativos,
                                              'usuario_logado': request.session.get('usuario'),
                                              'form': form,
@@ -54,6 +50,22 @@ def user(request):
     else:
         return redirect('/usuario/login/?status=2')
 
+def ver_ativo(request, id):
+    if request.session.get('usuario'):
+        ativos = Ativos.objects.get(id = id)
+        if request.session.get('usuario') == ativos.usuario.id:
+            usuario = Usuarios.objects.get(id = request.session['usuario'])
+            form = CadastroAtivos()
+            form.fields['usuario'].initial = request.session['usuario']
+
+            return render(request, 'ver_ativo.html', {'ativos': ativos,
+                                                      'usuario_logado': request.session.get('usuario'),
+                                                      'form': form,
+                                                      'id_ativo': id})
+        else:
+            return HttpResponse('ERRO: Ativo não pertence a este usuário')
+    return redirect('/usuario/login/?status=2')
+
 def cadastrar_ativo(request):
     if request.method =='POST':
         form = CadastroAtivos(request.POST)
@@ -62,7 +74,9 @@ def cadastrar_ativo(request):
             form.save()
             return redirect('/home/')
         else:
-            return HttpResponse("dados inválidos")
+            return HttpResponse("ERRO: Cadastro inválido")
 
-def excluir_ativo(request):
-    return HttpResponse('excluido')     
+def excluir_ativo(request, id):
+    ativo = Ativos.objects.get(id = id).delete()
+    return redirect('/home/') 
+      
