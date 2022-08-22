@@ -6,6 +6,7 @@ import pandas as pd
 from .models import Ativos
 from datetime import datetime
 from .forms import CadastroAtivos
+from django.core.mail import send_mail
 
 def inicio(request):
     return redirect('/usuario/login/')
@@ -19,13 +20,15 @@ def home(request):
         form.fields['usuario'].initial = request.session['usuario']
 
         for ativo in ativos:
-            x = web.DataReader(ativo.sigla, data_source='yahoo', start='08/19/2022', end=datetime.now())
-            x = pd.DataFrame(x)
-            print('valor atual de: ', ativo.sigla, 'é: ', x['Close'])
-            if(x['Close'].iloc[0] > ativo.preco_venda):
-                print('vende', ativo.sigla)
+            cotacao = web.DataReader(ativo.sigla, data_source='yahoo', start='08/19/2022', end=datetime.now())
+            cotacao = pd.DataFrame(cotacao)
+            print('valor atual de: ', ativo.sigla, 'é: ', cotacao['Close'])
+            if(cotacao['Close'].iloc[0] > ativo.preco_venda):
+                send_mail('Ativos', f"Ativo: {ativo.sigla}, Valor: {cotacao['Close'].iloc[0]}, Ação: Venda",'lucasmoura02@hotmail.com', ['lucas.moura.alcantara11@gmail.com'])
+                print('venda', ativo.sigla)
 
-            elif(x['Close'].iloc[0] < ativo.preco_compra):
+            elif(cotacao['Close'].iloc[0] < ativo.preco_compra):
+                send_mail('Ativos', f"Ativo: {ativo.sigla}, Valor: {cotacao['Close'].iloc[0]}, Ação: Compra",'lucasmoura02@hotmail.com', ['lucas.moura.alcantara11@gmail.com'])
                 print('compra', ativo.sigla)
             else:
                 print('nenhuma operação recomendada')
@@ -79,4 +82,4 @@ def cadastrar_ativo(request):
 def excluir_ativo(request, id):
     ativo = Ativos.objects.get(id = id).delete()
     return redirect('/home/') 
-      
+
