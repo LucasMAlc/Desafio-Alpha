@@ -24,11 +24,11 @@ def home(request):
             cotacao = pd.DataFrame(cotacao)
             print('valor atual de: ', ativo.sigla, 'é: ', cotacao['Close'])
             if(cotacao['Close'].iloc[0] > ativo.preco_venda):
-                send_mail('Ativos', f"Ativo: {ativo.sigla}, Valor: {cotacao['Close'].iloc[0]}, Ação: Venda",'lucasmoura02@hotmail.com', ['lucas.moura.alcantara11@gmail.com'])
+                send_mail('Ativos', f"Ativo: {ativo.sigla}, Valor: {cotacao['Close'].iloc[0]}, Ação: Venda",'lucasmoura02@hotmail.com', [f'{usuario.email}'])
                 print('venda', ativo.sigla)
 
             elif(cotacao['Close'].iloc[0] < ativo.preco_compra):
-                send_mail('Ativos', f"Ativo: {ativo.sigla}, Valor: {cotacao['Close'].iloc[0]}, Ação: Compra",'lucasmoura02@hotmail.com', ['lucas.moura.alcantara11@gmail.com'])
+                send_mail('Ativos', f"Ativo: {ativo.sigla}, Valor: {cotacao['Close'].iloc[0]}, Ação: Compra",'lucasmoura02@hotmail.com', [f'{usuario.email}'])
                 print('compra', ativo.sigla)
             else:
                 print('nenhuma operação recomendada')
