@@ -2,17 +2,18 @@
     Sistema em Python com Django do Desafio Alpha
 
 ## Para testar
-    PETR4.SA
-    ABEV3.SA
-    MGLU3.SA
-    ^BVSP
+Como a consulta é feita pelo yahoo finance se utiliza o .SA
+exemplos:
+        PETR4.SA
+        ABEV3.SA
+        MGLU3.SA
 
-# instalações feitas
+## pip install realizados:
 
     pip install django
     pip install pandas-datareader
     pip install python-decouple
 
-# rodar o projeto 
+## Rodar o projeto 
 
     python manage.py runserver
