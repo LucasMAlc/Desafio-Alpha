@@ -8,9 +8,9 @@
     position: relative;
     z-index: 1;
     background: #464646;
-    max-width: 50%px;
-    margin: 0 auto 5%px;
-    padding: 2%px;
+    max-width: 50%;
+    margin: 0 auto 5%;
+    padding: 2%;
     text-align: left;
     box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2), 0 5px 5px 0 rgba(0, 0, 0, 0.24);
   }
