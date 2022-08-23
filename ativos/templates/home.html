@@ -18,6 +18,7 @@
                           <h5 class="card-title">{{ativo.sigla}}</h5>
                           <p class="card-text">Preço de compra: {{ativo.preco_compra}}</p>
                           <p class="card-text">Preço de venda: {{ativo.preco_venda}}</p>
+                          <p class="card-text">Período de verificação: {{ativo.intervalo_verificar}}</p>
                           <a1 class="card-text">Mais informações?</a1>
                           <a href="https://br.financas.yahoo.com/quote/{{ativo.sigla}}" class="card-link">Clique aqui.</a>
                           <a href="{% url 'ver_ativo' ativo.id %}" class="btn btn-info">Acessar</a>
