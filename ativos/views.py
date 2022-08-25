@@ -20,18 +20,21 @@ def home(request):
         form.fields['usuario'].initial = request.session['usuario']
 
         for ativo in ativos:
-            cotacao = web.DataReader(ativo.sigla, data_source='yahoo', start='08/20/2022', end=datetime.now())
-            cotacao = pd.DataFrame(cotacao)
-            print('valor atual de: ', ativo.sigla, 'é: ', cotacao['Close'].iloc[-1])
-            if(cotacao['Close'].iloc[-1] > ativo.preco_venda):
-                send_mail('Ativos', f"Ativo: {ativo.sigla}, Valor: {cotacao['Close'].iloc[-1]}, Ação: Venda",'lucasmoura02@hotmail.com', [f'{usuario.email}'])
-                print('venda', ativo.sigla)
+            try:
+                cotacao = web.DataReader(ativo.sigla, data_source='yahoo', start='08/20/2022', end=datetime.now())
+                cotacao = pd.DataFrame(cotacao)
+                print('valor atual de: ', ativo.sigla, 'é: ', cotacao['Close'].iloc[-1])
+                if(cotacao['Close'].iloc[-1] > ativo.preco_venda):
+                    send_mail('Ativos', f"Ativo: {ativo.sigla}, Valor: {cotacao['Close'].iloc[-1]}, Ação: Venda",'lucasmoura02@hotmail.com', [f'{usuario.email}'])
+                    print('venda', ativo.sigla)
 
-            elif(cotacao['Close'].iloc[-1] < ativo.preco_compra):
-                send_mail('Ativos', f"Ativo: {ativo.sigla}, Valor: {cotacao['Close'].iloc[-1]}, Ação: Compra",'lucasmoura02@hotmail.com', [f'{usuario.email}'])
-                print('compra', ativo.sigla)
-            else:
-                print('nenhuma operação recomendada')
+                elif(cotacao['Close'].iloc[-1] < ativo.preco_compra):
+                    send_mail('Ativos', f"Ativo: {ativo.sigla}, Valor: {cotacao['Close'].iloc[-1]}, Ação: Compra",'lucasmoura02@hotmail.com', [f'{usuario.email}'])
+                    print('compra', ativo.sigla)
+                else:
+                    print('nenhuma operação recomendada')
+            except:
+                print("Falha ao obter cotação")
                 
         return render(request, 'home.html', {'ativos': ativos,
                                              'usuario_logado': request.session.get('usuario'),
