@@ -20,9 +20,9 @@ def home(request):
         form.fields['usuario'].initial = request.session['usuario']
 
         for ativo in ativos:
-            cotacao = web.DataReader(ativo.sigla, data_source='yahoo', start='08/11/2022', end=datetime.now())
+            cotacao = web.DataReader(ativo.sigla, data_source='yahoo', start='08/20/2022', end=datetime.now())
             cotacao = pd.DataFrame(cotacao)
-            print('valor atual de: ', ativo.sigla, 'é: ', cotacao['Close'])
+            print('valor atual de: ', ativo.sigla, 'é: ', cotacao['Close'].iloc[-1])
             if(cotacao['Close'].iloc[-1] > ativo.preco_venda):
                 send_mail('Ativos', f"Ativo: {ativo.sigla}, Valor: {cotacao['Close'].iloc[-1]}, Ação: Venda",'lucasmoura02@hotmail.com', [f'{usuario.email}'])
                 print('venda', ativo.sigla)
@@ -83,3 +83,15 @@ def excluir_ativo(request, id):
     ativo = Ativos.objects.get(id = id).delete()
     return redirect('/home/') 
 
+def editar_ativo(request, id):
+    ativos = Ativos.objects.get(id = id)
+    form = CadastroAtivos(instance=ativos)
+    if request.method =='POST':
+        form = CadastroAtivos(request.POST, instance=ativos)
+        if form.is_valid():
+            form.save()
+            return redirect('/home/')
+        else:
+            return HttpResponse("ERRO: Edição inválida")
+    else: 
+        return render(request, '/editar_ativo.html', {'form': form, 'ativo': ativos})

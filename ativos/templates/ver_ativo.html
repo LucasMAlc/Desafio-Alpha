@@ -31,15 +31,21 @@
     <div class="card" style="width: 18rem;">
       <div class="card-body">
 
-        <h5 class="card-title">{{ativos.sigla}}</h5>
-        <p class="card-text">Preço de compra: {{ativos.preco_compra}}</p>
-        <p class="card-text">Preço de venda: {{ativos.preco_venda}}</p>
-        <p class="card-text">Período de verificação: {{ativos.intervalo_verificar}}</p>
-        <a1 class="card-text">Mais informações?</a1>
-        <a href="https://br.financas.yahoo.com/quote/{{ativos.sigla}}" class="card-link">Clique aqui.</a>
-        <button type="button" class="btn btn-danger btn-lg" data-toggle="modal" data-target="#exampleModal2">
-          Excluir
-        </button>
+        <form action="{% url 'editar_ativo' id_ativo %}" method="POST">{% csrf_token %}
+
+          <h5 class="card-title">{{ativos.sigla}}</h5>
+          <table>
+            {{form.as_table}}
+          </table>
+          
+          <a1 class="card-text">Mais informações?</a1>
+          <a href="https://br.financas.yahoo.com/quote/{{ativos.sigla}}" class="card-link">Clique aqui.</a>
+          <button type="button" class="btn btn-danger btn-lg" data-toggle="modal" data-target="#exampleModal2">
+            Excluir
+          </button>
+          <input type="submit" class="btn btn-success btn-lg" value="Salvar">
+          
+        </form>
         
       </div>
     </div>
