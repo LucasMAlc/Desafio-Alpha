@@ -7,6 +7,7 @@ from .models import Ativos
 from datetime import datetime
 from .forms import CadastroAtivos
 from django.core.mail import send_mail
+from.tasks import enviar_email
 
 def inicio(request):
     return redirect('/usuario/login/')
@@ -19,22 +20,7 @@ def home(request):
         form = CadastroAtivos()
         form.fields['usuario'].initial = request.session['usuario']
 
-        for ativo in ativos:
-            try:
-                cotacao = web.DataReader(ativo.sigla, data_source='yahoo', start='08/20/2022', end=datetime.now())
-                cotacao = pd.DataFrame(cotacao)
-                print('valor atual de: ', ativo.sigla, 'é: ', cotacao['Close'].iloc[-1])
-                if(cotacao['Close'].iloc[-1] > ativo.preco_venda):
-                    send_mail('Ativos', f"Ativo: {ativo.sigla}, Valor: {cotacao['Close'].iloc[-1]}, Ação: Venda",'lucasmoura02@hotmail.com', [f'{usuario.email}'])
-                    print('venda', ativo.sigla)
-
-                elif(cotacao['Close'].iloc[-1] < ativo.preco_compra):
-                    send_mail('Ativos', f"Ativo: {ativo.sigla}, Valor: {cotacao['Close'].iloc[-1]}, Ação: Compra",'lucasmoura02@hotmail.com', [f'{usuario.email}'])
-                    print('compra', ativo.sigla)
-                else:
-                    print('nenhuma operação recomendada')
-            except:
-                print("Falha ao obter cotação")
+        enviar_email(usuario.id)
                 
         return render(request, 'home.html', {'ativos': ativos,
                                              'usuario_logado': request.session.get('usuario'),

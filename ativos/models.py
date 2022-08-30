@@ -5,7 +5,7 @@ class Ativos(models.Model):
     sigla = models.CharField(max_length= 100)
     preco_compra = models.FloatField()
     preco_venda = models.FloatField()
-    intervalo_verificar = models.IntegerField(default=0)
+    intervalo_verificar = models.CharField(max_length=20)
     usuario = models.ForeignKey(Usuarios, on_delete=models.DO_NOTHING)
 
     class Meta:
