@@ -20,4 +20,5 @@
 
     redis-server
     python manage.py runserver
-    celery -A desafio beat -l info
+    celery -A desafio  beat --loglevel=info
+    -A desafio worker -l INFO
