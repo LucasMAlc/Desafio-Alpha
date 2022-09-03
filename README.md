@@ -18,7 +18,9 @@
 
 ## Rodar o projeto 
 
-    redis-server
     python manage.py runserver
+
+    redis-server
+
     celery -A desafio  beat --loglevel=info
-    -A desafio worker -l INFO
+    celery -A desafio worker -l INFO   
